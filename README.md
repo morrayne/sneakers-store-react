@@ -1,20 +1,20 @@
 # Sneakers Store
 
-Pet-проект магазина кроссовок. Без реальной оплаты — только для портфолио.
+Проект магазина кроссовок (оплаты нет).
 
 ## Стек
 
 - React + TypeScript + Vite
 - Tailwind CSS v4
 - React Router
-- Zustand (корзина, тема)
-- Supabase (товары, заказы, auth)
+- Zustand 
+- Supabase 
 
 ## Запуск
 
-1. Клонируй репозиторий
+1. Сделать копию репозитория
 2. `npm install`
-3. Скопируй `.env.example` → `.env.local` и заполни значения из Supabase
+3. Скопировать `.env.example` → `.env.local` и заполни значения из Supabase
 4. `npm run dev`
 
 ## Переменные окружения
