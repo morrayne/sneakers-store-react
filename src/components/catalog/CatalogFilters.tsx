@@ -1,6 +1,5 @@
+import type { FilterOptions } from "@/hooks/useFilterOptions";
 import { cn } from "@/utils/cn";
-
-import type { FilterOptions } from '@/hooks/useFilterOptions'
 
 interface Props {
   options: FilterOptions;
@@ -15,7 +14,7 @@ interface Props {
 export default function CatalogFilters({ options, selected, onToggle }: Props) {
   return (
     <div className="space-y-6">
-      {/* Пол (тоже мультивыбор — унисекс + мужские например) */}
+      {/* Пол */}
       <div>
         <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-text-tertiary">Пол</h3>
         <div className="flex flex-wrap gap-2">
@@ -34,7 +33,7 @@ export default function CatalogFilters({ options, selected, onToggle }: Props) {
         </div>
       </div>
 
-      {/* Бренд (мультивыбор) */}
+      {/* Бренд */}
       <div>
         <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-text-tertiary">Бренд</h3>
         <div className="flex flex-wrap gap-2">
@@ -53,7 +52,7 @@ export default function CatalogFilters({ options, selected, onToggle }: Props) {
         </div>
       </div>
 
-      {/* Цвет (мультивыбор) */}
+      {/* Цвет */}
       <div>
         <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-text-tertiary">Цвет</h3>
         <div className="flex flex-wrap gap-2">

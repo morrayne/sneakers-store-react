@@ -3,9 +3,10 @@ export type Theme = "light" | "dark" | "system";
 // ─── Product ───────────────────────────────────────────────
 
 export interface ProductColor {
-  name: string;
-  color: string;
-  folder_name: string;
+  name: string
+  color: string
+  slug: string          // уникален в пределах товара, для картинок
+  base_color: string    // общий для фильтра, тип "blue"/"red"/...
 }
 
 export interface Product {

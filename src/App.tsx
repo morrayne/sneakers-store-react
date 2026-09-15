@@ -1,5 +1,11 @@
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import Login from "@/pages/Login";
+import Cart from "@/pages/Cart";
+import Signup from "@/pages/Signup";
+import Profile from "@/pages/Profile";
+import Favorites from "@/pages/Favorites";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import Layout from "@/components/layout/Layout";
 import Home from "@/pages/Home";
 import Catalog from "@/pages/Catalog";
@@ -35,6 +41,16 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/favorites" element={<Favorites />} />
+
+        {/* Защищённые роуты */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/profile" element={<Profile />} />
+        </Route>
+
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

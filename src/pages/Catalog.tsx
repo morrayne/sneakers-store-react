@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { useProducts, type SortOption } from "@/hooks/useProducts";
+import { UseProductList, type SortOption } from "@/hooks/useProductList";
 import { useFilterOptions } from "@/hooks/useFilterOptions";
 import ProductGrid from "@/components/product/ProductGrid";
 import EmptyState from "@/components/ui/EmptyState";
@@ -26,7 +26,7 @@ export default function Catalog() {
   const sort: SortOption = sortParam && SORT_OPTIONS.includes(sortParam) ? sortParam : "newest";
   const page = Math.max(1, parseInt(params.get("page") ?? "1", 10) || 1);
 
-  const { products, loading, error, total, totalPages } = useProducts({
+  const { products, loading, error, total, totalPages } = UseProductList({
     q,
     brands,
     categories,

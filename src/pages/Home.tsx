@@ -1,4 +1,11 @@
+import { useAuth } from "@/hooks/useAuth";
+
 export default function Home() {
+  
+  // внутри компонента:
+  const { user, loading } = useAuth();
+  console.log("auth:", { user, loading });
+
   return (
     <div className="mx-auto max-w-8xl px-4 py-16 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold text-text">Home</h1>

@@ -22,7 +22,7 @@ export default function ColorSelector({ colors, activeIndex, onChange }: Props) 
       <div className="flex flex-wrap gap-2">
         {colors.map((c, i) => (
           <button
-            key={c.folder_name}
+            key={c.slug}
             onClick={() => onChange(i)}
             title={c.name}
             aria-label={c.name}

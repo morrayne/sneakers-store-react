@@ -12,6 +12,7 @@ import ProductGallery from "@/components/product/ProductGallery";
 import ColorSelector from "@/components/product/ColorSelector";
 import SizeSelector from "@/components/product/SizeSelector";
 import AddToCartButton from "@/components/product/AddToCartButton";
+import FavoriteButton from "@/components/product/FavoriteButton";
 import ProductGrid from "@/components/product/ProductGrid";
 import EmptyState from "@/components/ui/EmptyState";
 import Skeleton from "@/components/ui/Skeleton";
@@ -142,8 +143,13 @@ export default function ProductDetail() {
           {/* Размеры */}
           <SizeSelector sizes={sizes} value={selectedSize} onChange={setSelectedSize} />
 
-          {/* Кнопка */}
-          <AddToCartButton disabled={!selectedSize} disabledReason="Выберите размер" onClick={handleAddToCart} />
+          {/* Кнопка «В корзину» + сердце */}
+          <div className="flex gap-3">
+            <div className="flex-1">
+              <AddToCartButton disabled={!selectedSize} disabledReason="Выберите размер" onClick={handleAddToCart} />
+            </div>
+            <FavoriteButton productId={product.id} variant="inline" size={20} />
+          </div>
 
           {/* Метаданные */}
           <div className="mt-2 space-y-1 border-t border-border pt-4 text-xs text-text-tertiary">

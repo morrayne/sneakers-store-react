@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Check, ChevronDown } from "lucide-react";
 import { cn } from "@/utils/cn";
-import type { SortOption } from "@/hooks/useProducts";
+import type { SortOption } from "@/hooks/useProductList";
 
 interface Props {
   value: SortOption;

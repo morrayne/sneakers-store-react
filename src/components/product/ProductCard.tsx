@@ -3,6 +3,7 @@ import type { Product } from "@/types";
 import { formatPrice } from "@/utils/formatPrice";
 import { getImageUrl } from "@/utils/getImageUrl";
 import { getDiscount } from "@/utils/getDiscount";
+import FavoriteButton from "./FavoriteButton";
 import ProductPlaceholder from "@/components/ui/ProductPlaceholder";
 
 interface Props {
@@ -18,7 +19,7 @@ export default function ProductCard({ product }: Props) {
       {/* Картинка / заглушка */}
       <div className="relative aspect-square overflow-hidden bg-bg-tertiary">
         {discount && <span className="absolute left-3 top-3 z-10 rounded-full bg-error px-2 py-0.5 text-[10px] font-bold text-white">−{discount}%</span>}
-
+        <FavoriteButton productId={product.id} />
         {imageUrl ? (
           <img src={imageUrl} alt={product.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
         ) : (
@@ -41,7 +42,7 @@ export default function ProductCard({ product }: Props) {
           {product.colors.length > 0 && (
             <div className="flex items-center gap-1">
               {product.colors.slice(0, 3).map((c) => (
-                <span key={c.folder_name} className="h-3 w-3 rounded-full ring-1 ring-border" style={{ backgroundColor: c.color }} title={c.name} />
+                <span key={c.slug} className="h-3 w-3 rounded-full ring-1 ring-border" style={{ backgroundColor: c.color }} title={c.name} />
               ))}
               {product.colors.length > 3 && <span className="text-[10px] text-text-tertiary">+{product.colors.length - 3}</span>}
             </div>

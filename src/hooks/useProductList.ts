@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/lib/supabase";
 import type { Product } from "@/types";
 
-export const PAGE_SIZE = 12;
+export const PAGE_SIZE = 16;
 
 export type SortOption = "newest" | "name-asc" | "name-desc" | "price-asc" | "price-desc" | "rating-desc";
 
@@ -15,7 +15,7 @@ export interface ProductFilters {
   page?: number;
 }
 
-interface UseProductsResult {
+interface UseProductListResult {
   products: Product[];
   total: number;
   totalPages: number;
@@ -23,7 +23,7 @@ interface UseProductsResult {
   error: string | null;
 }
 
-export function useProducts(filters: ProductFilters): UseProductsResult {
+export function UseProductList(filters: ProductFilters): UseProductListResult {
   const [products, setProducts] = useState<Product[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -62,8 +62,7 @@ export function useProducts(filters: ProductFilters): UseProductsResult {
       // ─── Фильтр по цветам (мультивыбор через jsonb) ───
       if (colorsKey) {
         const colorList = colorsKey.split(",");
-        // для каждого цвета — свой contains, склеенные через or
-        const orExpr = colorList.map((c) => `colors.cs.${JSON.stringify([{ folder_name: c }])}`).join(",");
+        const orExpr = colorList.map((c) => `colors.cs.${JSON.stringify([{ base_color: c }])}`).join(",");
         query = query.or(orExpr);
       }
 

@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { ShoppingBag, User, Monitor, Sun, Moon } from "lucide-react";
+import { ShoppingBag, User, Monitor, Sun, Moon, Heart } from "lucide-react";
+import { useFavoritesStore } from "@/store/favoritesStore";
 import { useThemeStore } from "@/store/themeStore";
 import { useCartStore } from "@/store/cartStore";
+import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/utils/cn";
 import type { Theme } from "@/types";
 
@@ -16,6 +18,8 @@ export default function Header() {
   const theme = useThemeStore((s) => s.theme);
   const setTheme = useThemeStore((s) => s.setTheme);
   const count = useCartStore((s) => s.count());
+  const { user } = useAuth();
+  const favoritesCount = useFavoritesStore((s) => s.ids.length);
 
   const [themeMenuOpen, setThemeMenuOpen] = useState(false);
 
@@ -25,7 +29,6 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-nav-bg backdrop-blur-md transition-colors">
-      {" "}
       <div className="mx-auto flex h-16 max-w-8xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link to="/" className="text-lg font-bold tracking-tight text-text">
           Sneakers
@@ -73,8 +76,17 @@ export default function Header() {
           </div>
 
           {/* Профиль */}
-          <Link to="/login" aria-label="Profile" className="rounded-full p-2 text-text transition-colors hover:bg-bg-tertiary">
+          <Link
+            to={user ? "/profile" : "/login"}
+            aria-label={user ? "Профиль" : "Войти"}
+            className={user ? "flex h-9 w-9 items-center justify-center rounded-full bg-accent text-white transition-colors hover:bg-accent-hover" : "rounded-full p-2 text-text transition-colors hover:bg-bg-tertiary"}
+          >
             <User size={18} />
+          </Link>
+          {/* Избранное */}
+          <Link to="/favorites" aria-label="Избранное" className="relative rounded-full p-2 text-text transition-colors hover:bg-bg-tertiary">
+            <Heart size={18} />
+            {favoritesCount > 0 && <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-text px-1 text-[10px] font-bold text-bg">{favoritesCount}</span>}
           </Link>
 
           {/* Корзина со счётчиком */}

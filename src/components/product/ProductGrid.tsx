@@ -8,7 +8,7 @@ interface Props {
   skeletonCount?: number;
 }
 
-export default function ProductGrid({ products, loading = false, skeletonCount = 12 }: Props) {
+export default function ProductGrid({ products, loading = false, skeletonCount = 16 }: Props) {
   if (loading) {
     return (
       <div className="grid grid-cols-4 gap-6">

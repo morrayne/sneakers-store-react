@@ -19,12 +19,12 @@ export const useCartStore = create<CartStore>()(
 
       addItem: (item) => {
         const existing = get().items.find(
-          (i) => i.productId === item.productId && i.size === item.size && i.color.folder_name === item.color.folder_name,
+          (i) => i.productId === item.productId && i.size === item.size && i.color.slug === item.color.slug,
         );
         if (existing) {
           set({
             items: get().items.map((i) =>
-              i.productId === item.productId && i.size === item.size && i.color.folder_name === item.color.folder_name
+              i.productId === item.productId && i.size === item.size && i.color.slug === item.color.slug
                 ? { ...i, quantity: i.quantity + item.quantity }
                 : i,
             ),
@@ -36,7 +36,7 @@ export const useCartStore = create<CartStore>()(
 
       removeItem: (productId, size, color) =>
         set({
-          items: get().items.filter((i) => !(i.productId === productId && i.size === size && i.color.folder_name === color)),
+          items: get().items.filter((i) => !(i.productId === productId && i.size === size && i.color.slug === color)),
         }),
 
       updateQuantity: (productId, size, color, quantity) => {
@@ -46,7 +46,7 @@ export const useCartStore = create<CartStore>()(
         }
         set({
           items: get().items.map((i) =>
-            i.productId === productId && i.size === size && i.color.folder_name === color ? { ...i, quantity } : i,
+            i.productId === productId && i.size === size && i.color.slug === color ? { ...i, quantity } : i,
           ),
         });
       },

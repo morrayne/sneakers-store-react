@@ -11,18 +11,18 @@ export interface FilterOptions {
   brands: string[];
   colors: ColorOption[];
   categories: { value: string; label: string }[];
+}
+
+export interface UseFilterOptionsResult extends FilterOptions {
   loading: boolean;
 }
 
-// категории фиксированы — это enum в БД, не данные
 const CATEGORIES = [
   { value: "men", label: "Мужские" },
   { value: "women", label: "Женские" },
   { value: "unisex", label: "Унисекс" },
 ];
 
-// читаемые названия для цветов
-// добавляй сюда новое, если появится новый folder_name в БД
 const COLOR_LABELS: Record<string, string> = {
   black: "Чёрный",
   white: "Белый",
@@ -36,7 +36,7 @@ const COLOR_LABELS: Record<string, string> = {
   yellow: "Жёлтый",
 };
 
-export function useFilterOptions(): FilterOptions {
+export function useFilterOptions(): UseFilterOptionsResult {
   const [brands, setBrands] = useState<string[]>([]);
   const [colors, setColors] = useState<ColorOption[]>([]);
   const [loading, setLoading] = useState(true);
@@ -51,9 +51,7 @@ export function useFilterOptions(): FilterOptions {
         return;
       }
 
-      // уникальные бренды
       const brandSet = new Set<string>();
-      // уникальные цвета по folder_name, первый встреченный hex выигрывает
       const colorMap = new Map<string, string>();
 
       for (const row of data as { brand: string; colors: any[] }[]) {
@@ -61,8 +59,8 @@ export function useFilterOptions(): FilterOptions {
 
         if (Array.isArray(row.colors)) {
           for (const c of row.colors) {
-            if (c?.folder_name && !colorMap.has(c.folder_name)) {
-              colorMap.set(c.folder_name, c.color ?? "#888888");
+            if (c?.base_color && !colorMap.has(c.base_color)) {
+              colorMap.set(c.base_color, c.color ?? "#888888");
             }
           }
         }
