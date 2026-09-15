@@ -5,6 +5,7 @@ import Cart from "@/pages/Cart";
 import Signup from "@/pages/Signup";
 import Profile from "@/pages/Profile";
 import Favorites from "@/pages/Favorites";
+import Checkout from "@/pages/Checkout";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import Layout from "@/components/layout/Layout";
 import Home from "@/pages/Home";
@@ -49,6 +50,7 @@ export default function App() {
         {/* Защищённые роуты */}
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<Profile />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />
