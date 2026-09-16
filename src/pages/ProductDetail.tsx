@@ -79,7 +79,7 @@ export default function ProductDetail() {
       name: product.name,
       brand: product.brand,
       price: product.price,
-      image: getImageUrl(product.images?.[0]),
+      image: getImageUrl(product.slug, activeColor.slug),
       color: activeColor,
       size: selectedSize,
       quantity: 1,

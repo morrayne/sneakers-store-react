@@ -3,15 +3,16 @@ import type { Product } from "@/types";
 import { formatPrice } from "@/utils/formatPrice";
 import { getImageUrl } from "@/utils/getImageUrl";
 import { getDiscount } from "@/utils/getDiscount";
-import FavoriteButton from "./FavoriteButton";
 import ProductPlaceholder from "@/components/ui/ProductPlaceholder";
+import FavoriteButton from "./FavoriteButton";
 
 interface Props {
   product: Product;
 }
 
 export default function ProductCard({ product }: Props) {
-  const imageUrl = getImageUrl(product.images?.[0]);
+  const primaryColor = product.colors[0];
+  const imageUrl = getImageUrl(product.slug, primaryColor?.slug);
   const discount = getDiscount(product.price, product.old_price);
 
   return (
@@ -19,7 +20,9 @@ export default function ProductCard({ product }: Props) {
       {/* Картинка / заглушка */}
       <div className="relative aspect-square overflow-hidden bg-bg-tertiary">
         {discount && <span className="absolute left-3 top-3 z-10 rounded-full bg-error px-2 py-0.5 text-[10px] font-bold text-white">−{discount}%</span>}
+
         <FavoriteButton productId={product.id} />
+
         {imageUrl ? (
           <img src={imageUrl} alt={product.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
         ) : (

@@ -11,6 +11,7 @@ export interface ProductColor {
 
 export interface Product {
   id: number
+  slug: string  
   name: string
   brand: string
   category: 'men' | 'women' | 'unisex'
