@@ -8,11 +8,12 @@ interface Props {
   skeletonCount?: number;
 }
 
-export default function ProductGrid({ products, loading = false, skeletonCount = 16 }: Props) {
+export default function ProductGrid({ products, loading = false, skeletonCount = 12 }: Props) {
+  const gridClass = "grid grid-cols-2 gap-4 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 lg:grid-cols-4";
+
   if (loading) {
     return (
-      <div className="grid grid-cols-4 gap-6">
-        {" "}
+      <div className={gridClass}>
         {Array.from({ length: skeletonCount }).map((_, i) => (
           <div key={i} className="flex flex-col overflow-hidden rounded-2xl border border-border bg-bg-secondary">
             <Skeleton className="aspect-square rounded-none" />
@@ -28,8 +29,7 @@ export default function ProductGrid({ products, loading = false, skeletonCount =
   }
 
   return (
-    <div className="grid grid-cols-4 gap-6">
-      {" "}
+    <div className={gridClass}>
       {products.map((p) => (
         <ProductCard key={p.id} product={p} />
       ))}

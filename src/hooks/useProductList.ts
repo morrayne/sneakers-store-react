@@ -23,7 +23,7 @@ interface UseProductListResult {
   error: string | null;
 }
 
-export function UseProductList(filters: ProductFilters): UseProductListResult {
+export function useProductList(filters: ProductFilters): UseProductListResult {
   const [products, setProducts] = useState<Product[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);

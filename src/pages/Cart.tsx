@@ -13,18 +13,17 @@ export default function Cart() {
   const total = useCartStore((s) => s.total());
   const count = useCartStore((s) => s.count());
 
-  // ─── пустая корзина ───
   if (items.length === 0) {
     return (
-      <div className="mx-auto max-w-8xl px-4 py-16 sm:px-6 lg:px-8">
-        <h1 className="mb-8 text-3xl font-bold text-text">Корзина</h1>
+      <div className="mx-auto max-w-8xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+        <h1 className="mb-6 text-2xl font-bold text-text sm:mb-8 sm:text-3xl">Cart</h1>
         <EmptyState
           icon={<ShoppingBag size={48} strokeWidth={1.5} />}
-          title="Корзина пуста"
-          description="Добавь что-нибудь из каталога"
+          title="Your cart is empty"
+          description="Add something from the catalog"
           action={
             <Link to="/catalog" className="rounded-full bg-accent px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-hover">
-              В каталог
+              Go to catalog
             </Link>
           }
         />
@@ -33,25 +32,23 @@ export default function Cart() {
   }
 
   return (
-    <div className="mx-auto max-w-8xl px-4 py-16 sm:px-6 lg:px-8">
-      {/* Заголовок */}
-      <header className="mb-8 flex items-end justify-between gap-4">
+    <div className="mx-auto max-w-8xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+      <header className="mb-6 flex items-end justify-between gap-4 sm:mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-text">Корзина</h1>
+          <h1 className="text-2xl font-bold text-text sm:text-3xl">Cart</h1>
           <p className="mt-1 text-sm text-text-secondary">
-            {count} {count === 1 ? "товар" : count < 5 ? "товара" : "товаров"}
+            {count} {count === 1 ? "item" : "items"}
           </p>
         </div>
 
         <button onClick={clearCart} className="text-xs text-text-tertiary transition-colors hover:text-text">
-          Очистить корзину
+          Clear cart
         </button>
       </header>
 
-      {/* Двухколоночный layout */}
-      <div className="grid grid-cols-[1fr_360px] gap-8">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_360px] lg:gap-8">
         {/* Список позиций */}
-        <div className="rounded-2xl border border-border bg-bg-secondary px-6">
+        <div className="rounded-2xl border border-border bg-bg-secondary px-4 sm:px-6">
           {items.map((item) => (
             <CartItemRow
               key={`${item.productId}-${item.size}-${item.color.slug}`}
@@ -64,11 +61,11 @@ export default function Cart() {
 
         {/* Итог + кнопка */}
         <aside>
-          <div className="sticky top-24 space-y-4">
+          <div className="space-y-4 lg:sticky lg:top-24">
             <CartSummary subtotal={total} itemCount={count} />
 
             <Link to="/checkout" className="block w-full rounded-full bg-accent py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-accent-hover">
-              Оформить заказ
+              Checkout
             </Link>
           </div>
         </aside>

@@ -28,17 +28,16 @@ export default function ProductDetail() {
   const [colorIndex, setColorIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
-  // при смене товара сбрасываем выбор
   useEffect(() => {
     setColorIndex(0);
     setSelectedSize(null);
   }, [productId]);
 
-  // ─── состояния загрузки / ошибки ───
+  // ─── Skeleton ───
   if (loading) {
     return (
-      <div className="mx-auto max-w-8xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 gap-12">
+      <div className="mx-auto max-w-8xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
           <Skeleton className="aspect-square w-full rounded-2xl" />
           <div className="space-y-4">
             <Skeleton className="h-4 w-24" />
@@ -51,15 +50,16 @@ export default function ProductDetail() {
     );
   }
 
+  // ─── Ошибка ───
   if (error || !product) {
     return (
-      <div className="mx-auto max-w-8xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-8xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
         <EmptyState
-          title={error ?? "Товар не найден"}
-          description="Возможно, он был удалён или ссылка неверна"
+          title={error ?? "Product not found"}
+          description="It may have been removed or the link is incorrect"
           action={
             <Link to="/catalog" className="rounded-full bg-accent px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-hover">
-              В каталог
+              Back to catalog
             </Link>
           }
         />
@@ -87,26 +87,26 @@ export default function ProductDetail() {
   };
 
   return (
-    <div className="mx-auto max-w-8xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-8xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
       {/* Хлебные крошки */}
-      <nav className="mb-6 flex items-center gap-2 text-xs text-text-secondary">
-        <Link to="/catalog" className="flex items-center gap-1 hover:text-text">
+      <nav className="mb-6 flex items-center gap-2 overflow-hidden text-xs text-text-secondary">
+        <Link to="/catalog" className="flex shrink-0 items-center gap-1 hover:text-text">
           <ChevronLeft size={12} />
-          Каталог
+          Catalog
         </Link>
-        <span>/</span>
-        <span className="text-text-tertiary">{product.brand}</span>
-        <span>/</span>
-        <span className="text-text">{product.name}</span>
+        <span className="shrink-0">/</span>
+        <span className="shrink-0 truncate capitalize">{product.brand}</span>
+        <span className="shrink-0">/</span>
+        <span className="truncate text-text">{product.name}</span>
       </nav>
 
-      {/* Двухколоночный layout */}
-      <div className="grid grid-cols-2 gap-12">
+      {/* Основная секция */}
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
         {/* Галерея */}
         <ProductGallery product={product} activeColorIndex={colorIndex} />
 
         {/* Информация */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-5 sm:gap-6">
           {/* Бренд + рейтинг */}
           <div className="flex items-center justify-between">
             <span className="text-xs uppercase tracking-wide text-text-tertiary">{product.brand}</span>
@@ -117,14 +117,14 @@ export default function ProductDetail() {
           </div>
 
           {/* Название */}
-          <h1 className="text-2xl font-bold text-text">{product.name}</h1>
+          <h1 className="text-xl font-bold text-text sm:text-2xl">{product.name}</h1>
 
           {/* Цена */}
-          <div className="flex items-baseline gap-3">
-            <span className="text-3xl font-semibold text-text">{formatPrice(product.price)}</span>
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <span className="text-2xl font-semibold text-text sm:text-3xl">{formatPrice(product.price)}</span>
             {product.old_price && (
               <>
-                <span className="text-lg text-text-tertiary line-through">{formatPrice(product.old_price)}</span>
+                <span className="text-base text-text-tertiary line-through sm:text-lg">{formatPrice(product.old_price)}</span>
                 {discount && <span className="rounded-full bg-error px-2 py-0.5 text-xs font-bold text-white">−{discount}%</span>}
               </>
             )}
@@ -143,19 +143,19 @@ export default function ProductDetail() {
           {/* Размеры */}
           <SizeSelector sizes={sizes} value={selectedSize} onChange={setSelectedSize} />
 
-          {/* Кнопка «В корзину» + сердце */}
+          {/* Кнопка + сердце */}
           <div className="flex gap-3">
             <div className="flex-1">
-              <AddToCartButton disabled={!selectedSize} disabledReason="Выберите размер" onClick={handleAddToCart} />
+              <AddToCartButton disabled={!selectedSize} disabledReason="Select a size" onClick={handleAddToCart} />
             </div>
             <FavoriteButton productId={product.id} variant="inline" size={20} />
           </div>
 
           {/* Метаданные */}
           <div className="mt-2 space-y-1 border-t border-border pt-4 text-xs text-text-tertiary">
-            <p>Категория: {product.category}</p>
+            <p>Category: {product.category}</p>
             <p>
-              В наличии: {product.colors.length} {product.colors.length === 1 ? "цвет" : "цвета"}
+              Available: {product.colors.length} {product.colors.length === 1 ? "color" : "colors"}
             </p>
           </div>
         </div>
@@ -163,8 +163,8 @@ export default function ProductDetail() {
 
       {/* Похожие */}
       {related.length > 0 && (
-        <section className="mt-20">
-          <h2 className="mb-6 text-xl font-bold text-text">Похожие товары</h2>
+        <section className="mt-12 sm:mt-16 lg:mt-20">
+          <h2 className="mb-4 text-lg font-bold text-text sm:mb-6 sm:text-xl">You may also like</h2>
           <ProductGrid products={related} skeletonCount={4} />
         </section>
       )}

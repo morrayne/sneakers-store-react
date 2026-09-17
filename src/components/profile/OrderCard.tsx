@@ -9,15 +9,15 @@ interface Props {
 
 const STATUS_LABELS: Record<string, { label: string; className: string }> = {
   pending: {
-    label: "В обработке",
+    label: "Processing",
     className: "bg-warning/15 text-warning",
   },
   processing: {
-    label: "Собирается",
+    label: "Packing",
     className: "bg-accent/15 text-accent",
   },
   done: {
-    label: "Доставлен",
+    label: "Delivered",
     className: "bg-success/15 text-success",
   },
 };
@@ -30,22 +30,21 @@ export default function OrderCard({ order }: Props) {
 
   const createdAt = new Date(order.created_at);
   const deliveryDate = new Date(createdAt);
-  // псевдо-случайное число от 3 до 7 на основе id, чтобы дата не прыгала при перерендере
   const deliveryDays = DELIVERY_MIN_DAYS + (order.id % (DELIVERY_MAX_DAYS - DELIVERY_MIN_DAYS + 1));
   deliveryDate.setDate(deliveryDate.getDate() + deliveryDays);
 
-  const dateFormat = new Intl.DateTimeFormat("ru-RU", {
+  const dateFormat = new Intl.DateTimeFormat("en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
 
   return (
-    <div className="rounded-2xl border border-border bg-bg-secondary p-6">
+    <div className="rounded-2xl border border-border bg-bg-secondary p-4 sm:p-6">
       {/* Шапка */}
-      <div className="flex flex-wrap items-start justify-between gap-4 border-b border-border pb-4">
+      <div className="flex flex-wrap items-start justify-between gap-3 border-b border-border pb-4">
         <div>
-          <p className="text-xs uppercase tracking-wide text-text-tertiary">Заказ №{order.id}</p>
+          <p className="text-xs uppercase tracking-wide text-text-tertiary">Order #{order.id}</p>
           <p className="mt-1 text-sm text-text-secondary">{dateFormat.format(createdAt)}</p>
         </div>
 
@@ -53,16 +52,16 @@ export default function OrderCard({ order }: Props) {
       </div>
 
       {/* Позиции */}
-      <div className="py-4">
+      <div className="py-3 sm:py-4">
         {order.items.map((item) => (
           <OrderItemRow key={item.id} item={item} />
         ))}
       </div>
 
       {/* Итог */}
-      <div className="flex items-baseline justify-between border-t border-border pt-4">
-        <div className="text-xs text-text-tertiary">{order.status === "done" ? <span>Доставлено</span> : <span>Ожидаемая доставка: {dateFormat.format(deliveryDate)}</span>}</div>
-        <span className="text-lg font-semibold text-text">{formatPrice(order.total)}</span>
+      <div className="flex flex-wrap items-baseline justify-between gap-2 border-t border-border pt-4">
+        <div className="text-xs text-text-tertiary">{order.status === "done" ? <span>Delivered</span> : <span>Estimated delivery: {dateFormat.format(deliveryDate)}</span>}</div>
+        <span className="text-base font-semibold text-text sm:text-lg">{formatPrice(order.total)}</span>
       </div>
     </div>
   );

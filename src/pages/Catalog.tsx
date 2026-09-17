@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { UseProductList, type SortOption } from "@/hooks/useProductList";
+import { SlidersHorizontal } from "lucide-react";
+import { useProductList, PAGE_SIZE, type SortOption } from "@/hooks/useProductList";
 import { useFilterOptions } from "@/hooks/useFilterOptions";
 import ProductGrid from "@/components/product/ProductGrid";
 import EmptyState from "@/components/ui/EmptyState";
@@ -7,6 +9,7 @@ import Pagination from "@/components/catalog/Pagination";
 import CatalogSearch from "@/components/catalog/CatalogSearch";
 import CatalogSort from "@/components/catalog/CatalogSort";
 import CatalogFilters from "@/components/catalog/CatalogFilters";
+import CatalogFiltersDrawer from "@/components/catalog/CatalogFiltersDrawer";
 
 const SORT_OPTIONS: SortOption[] = ["newest", "name-asc", "name-desc", "price-asc", "price-desc", "rating-desc"];
 
@@ -17,6 +20,7 @@ function parseList(value: string | null): string[] {
 
 export default function Catalog() {
   const [params, setParams] = useSearchParams();
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const q = params.get("q") ?? "";
   const brands = parseList(params.get("brands"));
@@ -26,7 +30,7 @@ export default function Catalog() {
   const sort: SortOption = sortParam && SORT_OPTIONS.includes(sortParam) ? sortParam : "newest";
   const page = Math.max(1, parseInt(params.get("page") ?? "1", 10) || 1);
 
-  const { products, loading, error, total, totalPages } = UseProductList({
+  const { products, loading, error, total, totalPages } = useProductList({
     q,
     brands,
     categories,
@@ -68,15 +72,22 @@ export default function Catalog() {
 
   const hasActiveFilters = !!q || brands.length > 0 || categories.length > 0 || colors.length > 0;
 
+  const filterOptionsProp = {
+    brands: filterOptions.brands,
+    categories: filterOptions.categories,
+    colors: filterOptions.colors,
+  };
+
   return (
-    <div className="mx-auto max-w-8xl px-4 py-16 sm:px-6 lg:px-8">
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold text-text">Каталог</h1>
-        <p className="mt-1 text-sm text-text-secondary">{loading ? "Загрузка…" : `Найдено: ${total}`}</p>
+    <div className="mx-auto max-w-8xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+      <header className="mb-6 sm:mb-8">
+        <h1 className="text-2xl font-bold text-text sm:text-3xl">Catalog</h1>
+        <p className="mt-1 text-sm text-text-secondary">{loading ? "Loading…" : `Found: ${total}`}</p>
       </header>
 
-      <div className="grid grid-cols-[260px_1fr] gap-8">
-        <aside>
+      <div className="lg:grid lg:grid-cols-[260px_1fr] lg:gap-8">
+        {/* Сайдбар фильтров — только на десктопе */}
+        <aside className="hidden lg:block">
           <div className="sticky top-24 space-y-6">
             <CatalogSearch value={q} onChange={(v) => setParam("q", v)} />
 
@@ -84,42 +95,57 @@ export default function Catalog() {
 
             <div className="border-t border-border pt-6">
               <div className="mb-4 flex items-center justify-between">
-                <h2 className="text-sm font-semibold text-text">Фильтры</h2>
+                <h2 className="text-sm font-semibold text-text">Filters</h2>
                 {hasActiveFilters && (
                   <button onClick={resetAll} className="text-xs text-text-tertiary hover:text-text">
-                    Сбросить
+                    Reset
                   </button>
                 )}
               </div>
 
-              <CatalogFilters
-                options={{
-                  brands: filterOptions.brands,
-                  categories: filterOptions.categories,
-                  colors: filterOptions.colors,
-                }}
-                selected={{ brands, categories, colors }}
-                onToggle={toggleListValue}
-              />
+              <CatalogFilters options={filterOptionsProp} selected={{ brands, categories, colors }} onToggle={toggleListValue} />
             </div>
           </div>
         </aside>
 
+        {/* Контент */}
         <div className="min-w-0">
+          {/* Мобильная панель: кнопка Filters + поиск */}
+          <div className="mb-4 flex items-center gap-2 lg:hidden">
+            <button onClick={() => setDrawerOpen(true)} className="flex shrink-0 items-center gap-2 rounded-full border border-border bg-bg-secondary px-4 py-2 text-sm font-medium text-text transition-colors hover:border-border-strong">
+              <SlidersHorizontal size={14} />
+              Filters
+              {hasActiveFilters && <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-text px-1 text-[10px] font-bold text-bg">{(brands.length > 0 ? 1 : 0) + (categories.length > 0 ? 1 : 0) + (colors.length > 0 ? 1 : 0)}</span>}
+            </button>
+
+            <div className="min-w-0 flex-1">
+              <CatalogSearch value={q} onChange={(v) => setParam("q", v)} />
+            </div>
+          </div>
+
+          {/* Сортировка — отдельной строкой на мобиле */}
+          <div className="mb-6 lg:hidden">
+            <CatalogSort value={sort} onChange={(v) => setParam("sort", v)} />
+          </div>
+
+          {/* Товары */}
           {error ? (
-            <EmptyState title="Не удалось загрузить товары" description={error} />
+            <EmptyState title="Failed to load products" description={error} />
           ) : !loading && products.length === 0 ? (
-            <EmptyState title="Ничего не найдено" description="Попробуй изменить фильтры или запрос" />
+            <EmptyState title="Nothing found" description="Try changing filters or search query" />
           ) : (
             <>
-              <ProductGrid products={products} loading={loading} />
-              <div className="mt-12">
+              <ProductGrid products={products} loading={loading} skeletonCount={PAGE_SIZE} />
+              <div className="mt-8 sm:mt-12">
                 <Pagination page={page} totalPages={totalPages} onChange={setPage} />
               </div>
             </>
           )}
         </div>
       </div>
+
+      {/* Drawer для мобильных */}
+      <CatalogFiltersDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} options={filterOptionsProp} selected={{ brands, categories, colors }} onToggle={toggleListValue} onReset={resetAll} hasActiveFilters={hasActiveFilters} />
     </div>
   );
 }
