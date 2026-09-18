@@ -16,13 +16,12 @@ export default function ProductCard({ product }: Props) {
   const discount = getDiscount(product.price, product.old_price);
 
   return (
-    <Link to={`/product/${product.id}`} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-bg-secondary transition-colors hover:border-border-strong">
+    <Link to={`/product/${product.id}`} className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-bg-secondary transition-colors hover:border-border-strong">
+
       {/* Картинка / заглушка */}
       <div className="relative aspect-square overflow-hidden bg-bg-tertiary">
-        {discount && <span className="absolute left-3 top-3 z-10 rounded-full bg-error px-2 py-0.5 text-[10px] font-bold text-white">−{discount}%</span>}
-
+        {discount && <span className="absolute left-3 top-3 z-10 rounded-full bg-error px-2 py-0.5 text-[10px] font-bold text-white">sale −{discount}%</span>}
         <FavoriteButton productId={product.id} />
-
         {imageUrl ? (
           <img src={imageUrl} alt={product.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
         ) : (

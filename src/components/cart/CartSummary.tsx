@@ -16,7 +16,7 @@ export default function CartSummary({ subtotal, itemCount }: Props) {
           <span>{formatPrice(subtotal)}</span>
         </div>
         <div className="flex justify-between text-text-secondary">
-          <span>Shipping</span>
+          <span>Shipping</span> 
           <span>Free</span>
         </div>
       </div>

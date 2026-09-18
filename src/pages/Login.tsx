@@ -8,7 +8,7 @@ export default function Login() {
   const from = (location.state as { from?: { pathname: string } })?.from?.pathname ?? "/profile";
 
   return (
-    <div className="mx-auto flex max-w-md flex-col px-4 py-16 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-8xl p-4 sm:p-6 lg:p-8">
       <h1 className="text-3xl font-bold text-text">Вход</h1>
       <p className="mt-2 text-sm text-text-secondary">Войдите, чтобы оформлять заказы и видеть историю</p>
 

@@ -12,7 +12,7 @@ export default function Cart() {
   const clearCart = useCartStore((s) => s.clearCart);
   const total = useCartStore((s) => s.total());
   const count = useCartStore((s) => s.count());
-
+ 
   if (items.length === 0) {
     return (
       <div className="mx-auto max-w-8xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
@@ -32,12 +32,12 @@ export default function Cart() {
   }
 
   return (
-    <div className="mx-auto max-w-8xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+    <div className="mx-auto max-w-8xl p-4 sm:p-6 lg:p-8">
       <header className="mb-6 flex items-end justify-between gap-4 sm:mb-8">
         <div>
           <h1 className="text-2xl font-bold text-text sm:text-3xl">Cart</h1>
           <p className="mt-1 text-sm text-text-secondary">
-            {count} {count === 1 ? "item" : "items"}
+            {count} {count === 1 ? "item now" : "items now"}
           </p>
         </div>
 

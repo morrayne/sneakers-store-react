@@ -5,7 +5,7 @@ export default function Signup() {
   const navigate = useNavigate();
 
   return (
-    <div className="mx-auto flex max-w-md flex-col px-4 py-16 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-8xl p-4 sm:p-6 lg:p-8">
       <h1 className="text-3xl font-bold text-text">Регистрация</h1>
       <p className="mt-2 text-sm text-text-secondary">Создайте аккаунт, чтобы оформлять заказы</p>
 

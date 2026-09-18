@@ -16,7 +16,7 @@ export default function CartItemRow({ item, onQuantityChange, onRemove }: Props)
       {/* Картинка / заглушка */}
       <Link to={`/product/${item.productId}`} className="block h-20 w-20 shrink-0 overflow-hidden rounded-xl border border-border sm:h-24 sm:w-24">
         {item.image ? <img src={item.image} alt={item.name} className="h-full w-full object-cover" /> : <ProductPlaceholder colors={[item.color]} name={item.name} className="h-full w-full" />}
-      </Link>
+      </Link> 
 
       {/* Информация */}
       <div className="flex min-w-0 flex-1 flex-col">

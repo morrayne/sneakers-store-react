@@ -46,7 +46,7 @@ export default function Favorites() {
 
   if (ids.length === 0) {
     return (
-      <div className="mx-auto max-w-8xl px-4 py-16 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-8xl p-4 sm:p-6 lg:p-8">
         <h1 className="mb-8 text-3xl font-bold text-text">Избранное</h1>
         <EmptyState
           icon={<Heart size={48} strokeWidth={1.5} />}
@@ -63,7 +63,7 @@ export default function Favorites() {
   }
 
   return (
-    <div className="mx-auto max-w-8xl px-4 py-16 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-8xl p-4 sm:p-6 lg:p-8">
       <header className="mb-8">
         <h1 className="text-3xl font-bold text-text">Избранное</h1>
         <p className="mt-1 text-sm text-text-secondary">

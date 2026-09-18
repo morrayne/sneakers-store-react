@@ -6,14 +6,14 @@
 
 /* ─── Палитра: светлая (Apple) ─── */
 :root {
-  --bg: #ffffff;
-  --bg-secondary: #fafafc;
-  --bg-tertiary: #f5f5f7;
-  --bg-quaternary: #e8e8ed;
+  --bg: #f5f5f7;
+  --bg-secondary: #ffffff; 
+  --bg-tertiary: #ebebed;
+  --bg-quaternary: #e0e0e3;
 
   --text: #1d1d1f;
-  --text-secondary: #6e6e73;
-  --text-tertiary: #86868b;
+  --text-secondary: #515154;
+  --text-tertiary: #b0b0b4;
 
   --border: #e5e5e7;
   --border-strong: #d2d2d7;
@@ -26,7 +26,7 @@
   --error: #e30000;
   --warning: #f56300;
 
-  --nav-bg: rgba(250, 250, 252, 0.8);
+  --nav-bg: #f5f5f780;
 }
 
 /* ─── Палитра: тёмная ─── */
@@ -37,8 +37,8 @@
   --bg-quaternary: #3a3a3c;
 
   --text: #f5f5f7;
-  --text-secondary: #a1a1a6;
-  --text-tertiary: #8e8e93;
+  --text-secondary: #c7c7cc;
+  --text-tertiary: #6e6e73;
 
   --border: #2c2c2e;
   --border-strong: #3a3a3c;
@@ -80,6 +80,7 @@
 
   --color-nav-bg: var(--nav-bg);
 }
+
 html {
   scrollbar-gutter: stable;
 }

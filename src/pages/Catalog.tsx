@@ -79,7 +79,7 @@ export default function Catalog() {
   };
 
   return (
-    <div className="mx-auto max-w-8xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+    <div className="mx-auto max-w-8xl p-4 sm:p-6 lg:p-8">
       <header className="mb-6 sm:mb-8">
         <h1 className="text-2xl font-bold text-text sm:text-3xl">Catalog</h1>
         <p className="mt-1 text-sm text-text-secondary">{loading ? "Loading…" : `Found: ${total}`}</p>

@@ -21,7 +21,7 @@ export default function Profile() {
   }
 
   return (
-    <div className="mx-auto max-w-8xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+    <div className="mx-auto max-w-8xl p-4 sm:p-6 lg:p-8">
       {justOrderedId && (
         <div className="mb-6 flex items-start gap-3 rounded-2xl border border-success/30 bg-success/10 p-4 sm:mb-8">
           <CheckCircle size={20} className="mt-0.5 shrink-0 text-success" />
