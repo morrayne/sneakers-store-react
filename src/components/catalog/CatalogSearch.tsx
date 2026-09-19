@@ -31,8 +31,8 @@ export default function CatalogSearch({ value, onChange }: Props) {
         type="text"
         value={local}
         onChange={(e) => setLocal(e.target.value)}
-        placeholder="Поиск по названию, бренду..."
-        className="w-full rounded-full border border-border bg-bg-secondary py-2 pl-9 pr-9 text-sm text-text placeholder:text-text-tertiary focus:border-border-strong focus:outline-none"
+        placeholder="Search..."
+        className="w-full rounded-full border border-border bg-bg-secondary py-2 pl-9 pr-9 text-s text-text placeholder:text-text-tertiary focus:border-border-strong focus:outline-none"
       />
       {local && (
         <button onClick={() => setLocal("")} aria-label="Clear search" className="absolute right-3 top-1/2 -translate-y-1/2 text-text-tertiary hover:text-text">
@@ -42,3 +42,4 @@ export default function CatalogSearch({ value, onChange }: Props) {
     </div>
   );
 }
+ 

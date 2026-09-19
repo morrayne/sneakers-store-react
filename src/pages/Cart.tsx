@@ -48,7 +48,7 @@ export default function Cart() {
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_360px] lg:gap-8">
         {/* Список позиций */}
-        <div className="rounded-2xl border border-border bg-bg-secondary px-4 sm:px-6">
+        <div className="h-fit rounded-2xl border border-border bg-bg-secondary px-4 sm:px-6">
           {items.map((item) => (
             <CartItemRow
               key={`${item.productId}-${item.size}-${item.color.slug}`}

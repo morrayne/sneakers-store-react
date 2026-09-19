@@ -30,18 +30,19 @@
 }
 
 /* ─── Палитра: тёмная ─── */
+/* ─── Палитра: тёмная ─── */
 .dark {
-  --bg: #000000;
-  --bg-secondary: #1c1c1e;
-  --bg-tertiary: #2c2c2e;
-  --bg-quaternary: #3a3a3c;
+  --bg: #1c1c1e;              /* база — тёмно-серый, как у Маркета */
+  --bg-secondary: #2c2c2e;    /* карточки — светлее базы */
+  --bg-tertiary: #3a3a3c;     /* hover, вложенные слои */
+  --bg-quaternary: #48484a;   /* активные состояния, границы */
 
   --text: #f5f5f7;
   --text-secondary: #c7c7cc;
-  --text-tertiary: #6e6e73;
+  --text-tertiary: #8e8e93;    /* чуть светлее прежнего, читается на сером */
 
-  --border: #2c2c2e;
-  --border-strong: #3a3a3c;
+  --border: #3a3a3c;           /* границы видны на #1c1c1e */
+  --border-strong: #48484a;
 
   --accent: #0a84ff;
   --accent-hover: #409cff;
@@ -51,7 +52,7 @@
   --error: #ff453a;
   --warning: #ff9f0a;
 
-  --nav-bg: rgba(0, 0, 0, 0.8);
+  --nav-bg: rgba(28, 28, 30, 0.8);   /* тот же тёмно-серый, что база */
 }
 
 @theme {

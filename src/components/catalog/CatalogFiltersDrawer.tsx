@@ -73,3 +73,4 @@ export default function CatalogFiltersDrawer({ open, onClose, options, selected,
     </div>
   );
 }
+ 

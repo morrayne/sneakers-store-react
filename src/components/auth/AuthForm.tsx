@@ -33,7 +33,7 @@ export default function AuthForm({ mode, onSuccess }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="mx-auto max-w-md space-y-4">
       <div>
         <label className="mb-1 block text-xs font-medium text-text-secondary">Email</label>
         <input
@@ -48,7 +48,7 @@ export default function AuthForm({ mode, onSuccess }: Props) {
       </div>
 
       <div>
-        <label className="mb-1 block text-xs font-medium text-text-secondary">Пароль</label>
+        <label className="mb-1 block text-xs font-medium text-text-secondary">Password</label>
         <input
           type="password"
           required
@@ -57,14 +57,14 @@ export default function AuthForm({ mode, onSuccess }: Props) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="w-full rounded-lg border border-border bg-bg-secondary px-4 py-2.5 text-sm text-text placeholder:text-text-tertiary focus:border-border-strong focus:outline-none"
-          placeholder="Минимум 6 символов"
+          placeholder="At least 6 characters"
         />
       </div>
 
       {error && <div className="rounded-lg border border-error/30 bg-error/10 px-4 py-2.5 text-xs text-error">{error}</div>}
 
       <button type="submit" disabled={loading} className="w-full rounded-full bg-accent py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-50">
-        {loading ? "Загрузка…" : isLogin ? "Войти" : "Зарегистрироваться"}
+        {loading ? "Loading…" : isLogin ? "Sign in" : "Sign up"}
       </button>
     </form>
   );
@@ -72,16 +72,16 @@ export default function AuthForm({ mode, onSuccess }: Props) {
 
 function translateError(message: string): string {
   if (message.includes("Invalid login credentials")) {
-    return "Неверный email или пароль";
+    return "Invalid email or password";
   }
   if (message.includes("User already registered")) {
-    return "Пользователь с таким email уже зарегистрирован";
+    return "An account with this email already exists";
   }
   if (message.includes("Password should be at least")) {
-    return "Пароль должен быть не короче 6 символов";
+    return "Password must be at least 6 characters";
   }
   if (message.includes("Unable to validate email address")) {
-    return "Некорректный email";
+    return "Invalid email address";
   }
   return message;
 }

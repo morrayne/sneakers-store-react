@@ -39,7 +39,7 @@ export default function AddToCartButton({ disabled, disabledReason, onClick }: P
         </>
       ) : (
         <>
-          <ShoppingBag size={16} />В корзину
+          <ShoppingBag size={16} />Add to shopping cart
         </>
       )}
     </button>

@@ -6,17 +6,17 @@ export default function Signup() {
 
   return (
     <div className="mx-auto max-w-8xl p-4 sm:p-6 lg:p-8">
-      <h1 className="text-3xl font-bold text-text">Регистрация</h1>
-      <p className="mt-2 text-sm text-text-secondary">Создайте аккаунт, чтобы оформлять заказы</p>
+      <h1 className="text-3xl font-bold text-text">Sign up</h1>
+      <p className="mt-2 text-sm text-text-secondary">Create an account to place orders</p>
 
       <div className="mt-8">
         <AuthForm mode="signup" onSuccess={() => navigate("/profile", { replace: true })} />
       </div>
 
       <p className="mt-6 text-center text-sm text-text-secondary">
-        Уже есть аккаунт?{" "}
+        Already have an account?{" "}
         <Link to="/login" className="text-link hover:underline">
-          Войти
+          Sign in
         </Link>
       </p>
     </div>

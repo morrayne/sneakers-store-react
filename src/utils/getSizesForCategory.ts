@@ -1,6 +1,6 @@
 export function getSizesForCategory(category: "men" | "women" | "unisex"): number[] {
-  const men = [40, 41, 42, 43, 44, 45, 46];
-  const women = [36, 37, 38, 39, 40, 41];
+  const men = [40, 41, 42, 43, 44, 45, 46, 47];
+  const women = [36, 37, 38, 39, 40, 41, 42, 43];
 
   switch (category) {
     case "men":

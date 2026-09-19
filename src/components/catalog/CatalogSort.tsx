@@ -9,12 +9,12 @@ interface Props {
 }
 
 const options: { value: SortOption; label: string }[] = [
-  { value: "newest", label: "Сначала новые" },
-  { value: "name-asc", label: "Название А–Я" },
-  { value: "name-desc", label: "Название Я–А" },
-  { value: "price-asc", label: "Цена ↑" },
-  { value: "price-desc", label: "Цена ↓" },
-  { value: "rating-desc", label: "По рейтингу" },
+  { value: "newest", label: "Newest" },
+  { value: "name-asc", label: "Name asc" },
+  { value: "name-desc", label: "Name desc" },
+  { value: "price-asc", label: "Price asc" },
+  { value: "price-desc", label: "Price desc" },
+  { value: "rating-desc", label: "Top rated" },
 ];
 
 export default function CatalogSort({ value, onChange }: Props) {
@@ -36,13 +36,13 @@ export default function CatalogSort({ value, onChange }: Props) {
 
   return (
     <div className="relative" ref={ref}>
-      <button onClick={() => setOpen((v) => !v)} className="flex items-center gap-2 rounded-full border border-border bg-bg-secondary px-4 py-2 text-sm text-text transition-colors hover:border-border-strong">
+      <button onClick={() => setOpen((v) => !v)} className="w-full flex items-center justify-between gap-2 rounded-full border border-border bg-bg-secondary px-4 py-2 text-s text-text transition-colors hover:border-border-strong">
         {current?.label ?? "Сортировка"}
         <ChevronDown size={14} className={cn("transition-transform", open && "rotate-180")} />
       </button>
 
       {open && (
-        <div className="absolute right-0 z-20 mt-1 w-48 overflow-hidden rounded-lg border border-border bg-bg-secondary shadow-lg">
+        <div className="w-full absolute right-0 z-20 mt-1 overflow-hidden rounded-lg border border-border bg-bg-secondary shadow-lg">
           {options.map((opt) => (
             <button
               key={opt.value}

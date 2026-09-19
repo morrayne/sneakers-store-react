@@ -15,13 +15,13 @@ export default function ProductGallery({ product, activeColorIndex }: Props) {
     return (
       <div className="aspect-square w-full overflow-hidden rounded-2xl border border-border">
         <ProductPlaceholder colors={activeColor ? [activeColor] : []} name={product.name} className="h-full w-full" />
-      </div>
+      </div> 
     );
   }
 
   return (
     <div className="aspect-square w-full overflow-hidden rounded-2xl border border-border bg-bg-tertiary">
       <img src={imageUrl} alt={`${product.name} — ${activeColor?.name ?? ""}`} className="h-full w-full object-cover" />
-    </div>
+    </div> 
   );
 }

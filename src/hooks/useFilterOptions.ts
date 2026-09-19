@@ -18,22 +18,22 @@ export interface UseFilterOptionsResult extends FilterOptions {
 }
 
 const CATEGORIES = [
-  { value: "men", label: "Мужские" },
-  { value: "women", label: "Женские" },
-  { value: "unisex", label: "Унисекс" },
+  { value: "men", label: "Men" },
+  { value: "women", label: "Women" },
+  { value: "unisex", label: "Unisex" },
 ];
 
 const COLOR_LABELS: Record<string, string> = {
-  black: "Чёрный",
-  white: "Белый",
-  grey: "Серый",
-  blue: "Синий",
-  red: "Красный",
-  green: "Зелёный",
-  brown: "Коричневый",
-  orange: "Оранжевый",
-  pink: "Розовый",
-  yellow: "Жёлтый",
+  black: "black",
+  white: "white",
+  grey: "grey",
+  blue: "blue",
+  red: "red",
+  green: "green",
+  brown: "brown",
+  orange: "orange",
+  pink: "pink",
+  yellow: "yellow",
 };
 
 export function useFilterOptions(): UseFilterOptionsResult {
@@ -71,7 +71,7 @@ export function useFilterOptions(): UseFilterOptionsResult {
         [...colorMap.entries()]
           .sort(([a], [b]) => a.localeCompare(b))
           .map(([value, hex]) => ({
-            value,
+            value, 
             hex,
             label: COLOR_LABELS[value] ?? value,
           })),

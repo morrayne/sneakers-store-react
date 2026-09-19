@@ -88,22 +88,21 @@ export default function Catalog() {
       <div className="lg:grid lg:grid-cols-[260px_1fr] lg:gap-8">
         {/* Сайдбар фильтров — только на десктопе */}
         <aside className="hidden lg:block">
-          <div className="sticky top-24 space-y-6">
+          <div className="sticky top-24 space-y-4">
             <CatalogSearch value={q} onChange={(v) => setParam("q", v)} />
 
             <CatalogSort value={sort} onChange={(v) => setParam("sort", v)} />
 
-            <div className="border-t border-border pt-6">
+            <div className="border-t border-border pt-2">
+              <CatalogFilters options={filterOptionsProp} selected={{ brands, categories, colors }} onToggle={toggleListValue} />
               <div className="mb-4 flex items-center justify-between">
-                <h2 className="text-sm font-semibold text-text">Filters</h2>
                 {hasActiveFilters && (
-                  <button onClick={resetAll} className="text-xs text-text-tertiary hover:text-text">
+                  <button onClick={resetAll} className="w-full mt-4 rounded-full border px-3 py-1 text-s font-medium transition-colors border-border bg-bg-secondary text-text-secondary hover:border-border-strong">
                     Reset
                   </button>
                 )}
               </div>
 
-              <CatalogFilters options={filterOptionsProp} selected={{ brands, categories, colors }} onToggle={toggleListValue} />
             </div>
           </div>
         </aside>

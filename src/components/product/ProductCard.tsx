@@ -23,18 +23,18 @@ export default function ProductCard({ product }: Props) {
         {discount && <span className="absolute left-3 top-3 z-10 rounded-full bg-error px-2 py-0.5 text-[10px] font-bold text-white">sale −{discount}%</span>}
         <FavoriteButton productId={product.id} />
         {imageUrl ? (
-          <img src={imageUrl} alt={product.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <img src={imageUrl} alt={product.name} loading="lazy" className="h-full w-full object-cover" />
         ) : (
           <ProductPlaceholder colors={product.colors} name={product.name} className="h-full w-full" />
         )}
       </div>
 
       {/* Информация */}
-      <div className="flex flex-1 flex-col gap-1 p-4">
+      <div className="flex flex-1 flex-col gap-1 py-3 px-4">
         <p className="text-xs uppercase tracking-wide text-text-tertiary">{product.brand}</p>
-        <h3 className="line-clamp-2 text-sm font-medium text-text">{product.name}</h3>
+        <h3 className="line-clamp-2 text-s font-semibold text-text">{product.name}</h3>
 
-        <div className="mt-auto flex items-center justify-between pt-3">
+        <div className="mt-auto flex items-center justify-between">
           <div className="flex items-baseline gap-2">
             <span className="text-base font-semibold text-text">{formatPrice(product.price)}</span>
             {product.old_price && <span className="text-xs text-text-tertiary line-through">{formatPrice(product.old_price)}</span>}

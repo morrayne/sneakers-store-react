@@ -68,3 +68,4 @@ function buildPages(current: number, total: number): (number | "…")[] {
 
   return pages;
 }
+ 

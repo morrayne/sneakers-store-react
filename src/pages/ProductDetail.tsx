@@ -89,46 +89,62 @@ export default function ProductDetail() {
   return (
     <div className="mx-auto max-w-8xl p-4 sm:p-6 lg:p-8">
       {/* Хлебные крошки */}
-      <nav className="mb-6 flex items-center gap-2 overflow-hidden text-xs text-text-secondary">
-        <Link to="/catalog" className="flex shrink-0 items-center gap-1 hover:text-text">
-          <ChevronLeft size={12} />
+      <nav className="mb-8 flex items-center gap-2 overflow-hidden text-sm text-text-secondary">
+        <Link to="/catalog" className="flex shrink-0 items-center gap-1 font-medium transition-colors hover:text-text">
+          <ChevronLeft size={14} />
           Catalog
         </Link>
-        <span className="shrink-0">/</span>
-        <span className="shrink-0 truncate capitalize">{product.brand}</span>
-        <span className="shrink-0">/</span>
-        <span className="truncate text-text">{product.name}</span>
+        <span className="shrink-0 text-text-tertiary/60">/</span>
+        <Link to={`/catalog?brands=${product.brand}`} className="shrink-0 truncate capitalize transition-colors hover:text-text">
+          {product.brand}
+        </Link>{" "}
+        <span className="shrink-0 text-text-tertiary/60">/</span>
+        <span className="truncate font-medium text-text">{product.name}</span>
       </nav>
 
       {/* Основная секция */}
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
+      <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-14">
         {/* Галерея */}
         <ProductGallery product={product} activeColorIndex={colorIndex} />
 
         {/* Информация */}
-        <div className="flex flex-col gap-5 sm:gap-6">
+        <div className="flex flex-col gap-6 sm:gap-7">
           {/* Бренд + рейтинг */}
-          <div className="flex items-center justify-between">
-            <span className="text-xs uppercase tracking-wide text-text-tertiary">{product.brand}</span>
-            <div className="flex items-center gap-1 text-xs text-text-secondary">
-              <Star size={12} className="fill-current" />
-              {product.rating}
+          <div className="flex items-center justify-between gap-4">
+            <span className="truncate text-sm font-semibold uppercase tracking-[0.12em] text-text-tertiary">{product.brand}</span>
+            <div className="flex shrink-0 items-center gap-1.5 rounded-full bg-surface-secondary px-3 py-1 text-sm font-medium text-text-secondary">
+              <Star size={14} className="fill-current text-amber-400" />
+              <span>{product.rating}</span>
             </div>
           </div>
 
           {/* Название */}
-          <h1 className="text-xl font-bold text-text sm:text-2xl">{product.name}</h1>
+          <h1 className="text-2xl font-bold leading-tight tracking-tight text-text sm:text-3xl lg:text-4xl">{product.name}</h1>
 
           {/* Цена */}
-          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-            <span className="text-2xl font-semibold text-text sm:text-3xl">{formatPrice(product.price)}</span>
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1.5">
+            <span className="text-3xl font-bold tracking-tight text-text sm:text-4xl">{formatPrice(product.price)}</span>
             {product.old_price && (
               <>
-                <span className="text-base text-text-tertiary line-through sm:text-lg">{formatPrice(product.old_price)}</span>
-                {discount && <span className="rounded-full bg-error px-2 py-0.5 text-xs font-bold text-white">−{discount}%</span>}
+                <span className="text-lg font-normal text-text-tertiary line-through">{formatPrice(product.old_price)}</span>
+                {discount && <span className="rounded-md bg-error/10 px-2 py-0.5 text-sm font-semibold text-error">−{discount}%</span>}
               </>
             )}
           </div>
+
+          {/* Метаданные */}
+          <dl className="flex flex-wrap gap-x-8 gap-y-1 border-y border-border py-4 text-sm">
+            <div className="flex items-baseline gap-2">
+              <dt className="text-text-tertiary">Category</dt>
+              <dd className="capitalize font-medium text-text-secondary">{product.category}</dd>
+            </div>
+            <div className="flex items-baseline gap-2">
+              <dt className="text-text-tertiary">Available</dt>
+              <dd className="font-medium text-text-secondary">
+                {product.colors.length} {product.colors.length === 1 ? "color" : "colors"}
+              </dd>
+            </div>
+          </dl>
 
           {/* Цвета */}
           <ColorSelector
@@ -144,27 +160,19 @@ export default function ProductDetail() {
           <SizeSelector sizes={sizes} value={selectedSize} onChange={setSelectedSize} />
 
           {/* Кнопка + сердце */}
-          <div className="flex gap-3">
+          <div className="flex items-stretch gap-3 pt-1">
             <div className="flex-1">
               <AddToCartButton disabled={!selectedSize} disabledReason="Select a size" onClick={handleAddToCart} />
             </div>
-            <FavoriteButton productId={product.id} variant="inline" size={20} />
-          </div>
-
-          {/* Метаданные */}
-          <div className="mt-2 space-y-1 border-t border-border pt-4 text-xs text-text-tertiary">
-            <p>Category: {product.category}</p>
-            <p>
-              Available: {product.colors.length} {product.colors.length === 1 ? "color" : "colors"}
-            </p>
+            <FavoriteButton productId={product.id} variant="inline" size={22} />
           </div>
         </div>
       </div>
 
       {/* Похожие */}
       {related.length > 0 && (
-        <section className="mt-12 sm:mt-16 lg:mt-20">
-          <h2 className="mb-4 text-lg font-bold text-text sm:mb-6 sm:text-xl">You may also like</h2>
+        <section className="mt-16 sm:mt-20 lg:mt-24">
+          <h2 className="mb-6 text-xl font-bold tracking-tight text-text sm:mb-8 sm:text-2xl">You may also like</h2>
           <ProductGrid products={related} skeletonCount={4} />
         </section>
       )}

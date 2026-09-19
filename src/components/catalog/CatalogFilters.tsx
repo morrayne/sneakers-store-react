@@ -10,13 +10,13 @@ interface Props {
   };
   onToggle: (key: "brands" | "categories" | "colors", value: string) => void;
 }
-
+ 
 export default function CatalogFilters({ options, selected, onToggle }: Props) {
   return (
     <div className="space-y-6">
       {/* Пол */}
       <div>
-        <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-text-tertiary">Пол</h3>
+        <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-text-tertiary">Gender</h3>
         <div className="flex flex-wrap gap-2">
           {options.categories.map((c) => {
             const active = selected.categories.includes(c.value);
@@ -35,7 +35,7 @@ export default function CatalogFilters({ options, selected, onToggle }: Props) {
 
       {/* Бренд */}
       <div>
-        <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-text-tertiary">Бренд</h3>
+        <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-text-tertiary">Brand</h3>
         <div className="flex flex-wrap gap-2">
           {options.brands.map((b) => {
             const active = selected.brands.includes(b);
@@ -54,7 +54,7 @@ export default function CatalogFilters({ options, selected, onToggle }: Props) {
 
       {/* Цвет */}
       <div>
-        <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-text-tertiary">Цвет</h3>
+        <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-text-tertiary">Primary color</h3>
         <div className="flex flex-wrap gap-2">
           {options.colors.map((c) => {
             const active = selected.colors.includes(c.value);
