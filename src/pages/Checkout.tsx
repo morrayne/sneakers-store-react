@@ -84,7 +84,7 @@ export default function Checkout() {
       setServerError(err instanceof Error ? err.message : "Failed to place order");
       setSubmitting(false);
     }
-  }
+  } 
 
   return (
     <div className="mx-auto max-w-8xl p-4 sm:p-6 lg:p-8">

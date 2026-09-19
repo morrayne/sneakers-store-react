@@ -15,7 +15,7 @@ export default function Cart() {
  
   if (items.length === 0) {
     return (
-      <div className="mx-auto max-w-8xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+      <div className="mx-auto max-w-8xl p-4 sm:p-6 lg:p-8">
         <h1 className="mb-6 text-2xl font-bold text-text sm:mb-8 sm:text-3xl">Cart</h1>
         <EmptyState
           icon={<ShoppingBag size={48} strokeWidth={1.5} />}
@@ -44,7 +44,7 @@ export default function Cart() {
         <button onClick={clearCart} className="text-xs text-text-tertiary transition-colors hover:text-text">
           Clear cart
         </button>
-      </header>
+      </header> 
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_360px] lg:gap-8">
         {/* Список позиций */}

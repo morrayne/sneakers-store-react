@@ -30,7 +30,7 @@ export default function Favorites() {
       if (error || !data) {
         setProducts([]);
       } else {
-        // сохраняем порядок лайков — новые сверху
+        // keep favorites order — newest first
         const ordered = ids.map((id) => (data as Product[]).find((p) => p.id === id)).filter((p): p is Product => Boolean(p));
         setProducts(ordered);
       }
@@ -46,15 +46,15 @@ export default function Favorites() {
 
   if (ids.length === 0) {
     return (
-    <div className="mx-auto max-w-8xl p-4 sm:p-6 lg:p-8">
-        <h1 className="mb-8 text-3xl font-bold text-text">Избранное</h1>
+      <div className="mx-auto max-w-8xl p-4 sm:p-6 lg:p-8">
+        <h1 className="mb-8 text-3xl font-bold text-text">Favorites</h1>
         <EmptyState
           icon={<Heart size={48} strokeWidth={1.5} />}
-          title="Пока пусто"
-          description="Добавляй товары в избранное, кликая на сердечко"
+          title="Nothing here yet"
+          description="Add items to favorites by tapping the heart icon"
           action={
             <Link to="/catalog" className="rounded-full bg-accent px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-hover">
-              В каталог
+              Go to catalog
             </Link>
           }
         />
@@ -65,9 +65,9 @@ export default function Favorites() {
   return (
     <div className="mx-auto max-w-8xl p-4 sm:p-6 lg:p-8">
       <header className="mb-8">
-        <h1 className="text-3xl font-bold text-text">Избранное</h1>
+        <h1 className="text-3xl font-bold text-text">Favorites</h1>
         <p className="mt-1 text-sm text-text-secondary">
-          {ids.length} {ids.length === 1 ? "товар" : ids.length < 5 ? "товара" : "товаров"}
+          {ids.length} {ids.length === 1 ? "item" : "items"}
         </p>
       </header>
 
