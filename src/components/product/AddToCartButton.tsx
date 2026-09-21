@@ -35,7 +35,7 @@ export default function AddToCartButton({ disabled, disabledReason, onClick }: P
       {added ? (
         <>
           <Check size={16} />
-          Добавлено
+          Added
         </>
       ) : (
         <>
